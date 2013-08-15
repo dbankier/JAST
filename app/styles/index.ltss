@@ -1,0 +1,15 @@
+@color1: 'red'
+@color2: 'white'
+
+".container": {
+	backgroundColor: @color1
+},
+"Label": {
+	width: Ti.UI.SIZE,
+	height: Ti.UI.SIZE,
+	color: @color1,
+  height: '30dp',
+  width: '120dp',
+  backgroundColor: @color2,
+  textAlign: 'center'
+} 
