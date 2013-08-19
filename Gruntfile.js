@@ -28,22 +28,26 @@ module.exports = function(grunt) {
     tishadow: {
       options: {
         update: true,
-        withAlloy: true,
-        alloy: {
-          noBanner: true,
-          logLevel: 1
-        }
+        withAlloy: true
       },
       run_android: {
         command: 'run',
-        alloy: {
-          platform: ['android']
+        options: {
+          alloy: {
+            platform: ['android'],
+            noBanner: true,
+            logLevel: 1
+          }
         }
       },
       run_ios:{
         command: 'run',
-        alloy: {
-          platform: ['ios']
+        options: {
+          alloy: {
+            platform: ['ios'],
+            noBanner: true,
+            logLevel: 1
+          }
         }
       }
     },
