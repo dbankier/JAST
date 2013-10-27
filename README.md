@@ -28,5 +28,6 @@ JALT is a boilerplate with a  mash of tools for rapid Alloy development. Let's b
  * `grunt` - compiles the jade and ltss files
  * `grunt [dev_android|dev_ios]` - auto compile and pushes with TiShadow
  * `grunt [test_android|test_ios]` - run specs 
+ * `grunt clean` - deletes all generated files
 
 License: MIT
