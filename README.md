@@ -24,8 +24,18 @@ If you would like coffee with that see [grunt-titanium-tishadow](https://github.
 
 # Let's Go
 
+## Manually
+
  * Clone the repository
  * Install the dependencies: `npm install -d` 
+
+## Use the [Yeoman](http://yeoman.io) generator: [generator-jalt](https://github.com/dbankier/generator-jalt)
+
+``` 
+ npm install -g yo generator-jalt
+ mkdir /path/to/new/app && cd $_
+ yo jalt
+```
 
 # Commands
 
