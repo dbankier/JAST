@@ -7,7 +7,7 @@ module.exports = function(grunt) {
         },
         files: [{
           expand: true,
-          src: ['**/*.jade'],
+          src: ['**/*.jade','!**/includes/**'],
           dest: 'app',
           cwd: 'app',
           ext: '.xml'
@@ -18,7 +18,7 @@ module.exports = function(grunt) {
       compile: {
         files: [{
           expand: true,
-          src: ['**/*.ltss'],
+          src: ['**/*.ltss','!**/includes/**'],
           dest: 'app',
           cwd: 'app',
           ext: '.tss'
@@ -49,33 +49,68 @@ module.exports = function(grunt) {
             logLevel: 1
           }
         }
+      },
+      spec_android: {
+        command: 'spec',
+        options: {
+          update: false,
+          alloy: {
+            platform: ['android'],
+            noBanner: true,
+            logLevel: 1
+          }
+        }
+      },
+      spec_ios:{
+        command: 'spec',
+        options: {
+          update: false,
+          alloy: {
+            platform: ['ios'],
+            noBanner: true,
+            logLevel: 1
+          }
+        }
+      },
+      clear: {
+        command: 'clear',
+        options: {
+          withAlloy:false
+        }
       }
     },
     watch: {
       options: {
         nospawn: true
       },
-      jade: {
-        files:'app/**/*.jade',
-        tasks: ['jade','tishadow:run_ios']
+      ios: {
+        files: ['app/**/*.js', 'app/**/*.jade', 'app/**/*.ltss'],
+        tasks: ['build','tishadow:run_ios']
       },
-      ltss: {
-        files: 'app/**/*.ltss',
-        tasks: ['ltss','tishadow:run_ios']
-      },
-      tishadow: {
-        files: ['app/**/*.js', 'app/**/*.xml', 'app/**/*.tss'],
-        tasks: ['tishadow:run_ios']
+      android: {
+        files: ['app/**/*.js', 'app/**/*.xml', 'app/**/*.ltss'],
+        tasks: ['build','tishadow:run_android']
+      }
+    },
+    clean: {
+      project: {
+        src: ['app/views/**/*.xml', 'app/styles/**/*.tss', 'Resources/', 'build/']
       }
     }
   });
    
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-jade');
+  grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-ltss');
   grunt.loadNpmTasks('grunt-tishadow');
    
-  grunt.registerTask('default', ['jade','ltss']);
+  grunt.registerTask('default', 'build');
+  grunt.registerTask('build', ['jade','ltss']);
+  grunt.registerTask('dev_ios', ['build','tishadow:run_ios','watch:ios']);
+  grunt.registerTask('dev_android', ['build','tishadow:run_android','watch:android']);
+  grunt.registerTask('test_ios', ['tishadow:clear','build','tishadow:spec_ios']);
+  grunt.registerTask('test_android', ['tishadow:clear','build','tishadow:spec_android']);
    
   //only modify changed file
   grunt.event.on('watch', function(action, filepath) {
@@ -88,5 +123,4 @@ module.exports = function(grunt) {
       grunt.config.set(['ltss', 'compile', 'files'],o);
     }
   });
-   
 };

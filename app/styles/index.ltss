@@ -1,15 +1,18 @@
-@color1: 'red'
-@color2: 'white'
+@include("./includes/bootstrap")
+
+@color1: 'white';
+@color2: 'blue';
 
 ".container": {
 	backgroundColor: @color1
 },
 "Label": {
-	width: Ti.UI.SIZE,
-	height: Ti.UI.SIZE,
+  .padding("80dp"),
 	color: @color1,
-  height: '30dp',
-  width: '120dp',
+  font: {
+    fontSize: '33dp',
+    fontWeight: 'bold'
+  },
   backgroundColor: @color2,
   textAlign: 'center'
 } 

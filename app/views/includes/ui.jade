@@ -1,0 +1,5 @@
+mixin option_dialog(id, options, onClick)
+  OptionDialog(id=id, onClick=onClick)
+    Options
+      each o in options
+        Option #{o}

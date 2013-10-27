@@ -1,12 +1,16 @@
 ".container": {
-	backgroundColor: 'red'
+	backgroundColor: 'white'
 },
 "Label": {
-	width: Ti.UI.SIZE,
-	height: Ti.UI.SIZE,
-	color: 'red',
-  height: '30dp',
-  width: '120dp',
-  backgroundColor: 'white',
+  top: "80dp",
+  bottom: "80dp",
+  left: "80dp",
+  right: "80dp",
+	color: 'white',
+  font: {
+    fontSize: '33dp',
+    fontWeight: 'bold'
+  },
+  backgroundColor: 'blue',
   textAlign: 'center'
 }

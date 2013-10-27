@@ -1,0 +1,6 @@
+.padding (@pad: '5dp') {
+  top: @pad,
+  bottom: @pad,
+  left: @pad,
+  right: @pad
+}

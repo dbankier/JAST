@@ -2,5 +2,12 @@
 <Alloy>
   <Window class="container">
     <Label id="label" onClick="doClick">Hello Alloy</Label>
+    <OptionDialog id="dialog">
+      <Options>
+        <Option>Yes</Option>
+        <Option>No</Option>
+        <Option>Maybe</Option>
+      </Options>
+    </OptionDialog> 
   </Window>
 </Alloy>
