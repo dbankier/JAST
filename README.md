@@ -10,6 +10,8 @@ JALT is a boilerplate with a  mash of tools for rapid Alloy development. Let's b
  * [TiShadow](http://tishadow.yydigital.com/) - the fastest __Open Source__ toolset
    for titanium development.
 
+If you would like coffee with that see [grunt-titanium-tishadow](https://github.com/xissy/grunt-titanium-tishadow).
+
 # Prerequisites
 
  * Do this:
