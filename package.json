@@ -1,15 +1,15 @@
 {
-  "name": "GruntTest",
-  "version": "0.0.0",
-  "description": "Welcome to your Appcelerator Titanium Mobile Project",
+  "name": "JALT",
+  "version": "0.0.1",
+  "description": "JALT is a boilerplate with a mash of tools for rapid Alloy development.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": "",
+  "repository": "https://github.com/dbankier/JALT",
   "author": "David Bankier",
   "license": "MIT",
-  "readmeFilename": "README",
+  "readmeFilename": "README.md",
   "devDependencies": {
     "grunt-ltss": "~0.1.2",
     "grunt-tishadow": "~1.0.1",
