@@ -1,0 +1,12 @@
+{
+  "libs": [
+    "titanium",
+    "ecma5"
+    ],
+    "plugins": {
+      "requirejs": {
+        "baseURL": "./app",
+        "paths": {}
+      }
+    }
+}
