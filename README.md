@@ -1,5 +1,7 @@
 # JALT Stack
 
+![JALT logo](http://github.com/dbankier/jalt/raw/master/jalt.png)
+
 JALT is a boilerplate with a  mash of tools for rapid Alloy development. Let's be opinionated then. The stack includes:
 
  * [Alloy](http://projects.appcelerator.com/alloy/docs/Alloy-bootstrap/index.html) -
