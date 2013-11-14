@@ -123,11 +123,11 @@ module.exports = function(grunt) {
         nospawn: true
       },
       ios: {
-        files: ['app/**/*.js', 'app/**/*.jade', 'app/**/*.ltss'],
+        files: ["i18n/**","app/**/*.jade","app/**/*.ltss","app/**/*.js"],
         tasks: ['build','tishadow:run_ios']
       },
       android: {
-        files: ['app/**/*.js', 'app/**/*.jade', 'app/**/*.ltss'],
+        files: ["i18n/**","app/**/*.jade","app/**/*.ltss","app/**/*.js"],
         tasks: ['build','tishadow:run_android']
       }
     },
