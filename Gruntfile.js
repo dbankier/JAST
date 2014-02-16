@@ -39,54 +39,36 @@ module.exports = function(grunt) {
     tishadow: {
       options: {
         update: true,
-        withAlloy: true
       },
       run_android: {
         command: 'run',
         options: {
-          alloy: {
-            platform: ['android'],
-            noBanner: true,
-            logLevel: 1
-          }
+          platform: 'android'
         }
       },
       run_ios:{
         command: 'run',
         options: {
-          alloy: {
-            platform: ['ios'],
-            noBanner: true,
-            logLevel: 1
-          }
+            platform: 'ios'
         }
       },
       spec_android: {
         command: 'spec',
         options: {
           update: false,
-          alloy: {
-            platform: ['android'],
-            noBanner: true,
-            logLevel: 1
-          }
+          platform: ['android'],
         }
       },
       spec_ios:{
         command: 'spec',
         options: {
           update: false,
-          alloy: {
-            platform: ['ios'],
-            noBanner: true,
-            logLevel: 1
-          }
+          platform: ['ios'],
         }
       },
       clear: {
         command: 'clear',
         options: {
-          withAlloy:false
         }
       }
     },
@@ -123,11 +105,11 @@ module.exports = function(grunt) {
         nospawn: true
       },
       ios: {
-        files: ["i18n/**","app/**/*.jade","app/**/*.ltss","app/**/*.js"],
+        files: ['i18n/**', 'app/**/*.js', 'app/**/*.jade', 'app/**/*.ltss', 'app/assets/**', 'app/lib/**'],
         tasks: ['build','tishadow:run_ios']
       },
       android: {
-        files: ["i18n/**","app/**/*.jade","app/**/*.ltss","app/**/*.js"],
+        files: ['i18n/**', 'app/**/*.js', 'app/**/*.jade', 'app/**/*.ltss', 'app/assets/**', 'app/lib/**'],
         tasks: ['build','tishadow:run_android']
       }
     },
