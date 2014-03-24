@@ -52,6 +52,9 @@ module.exports = function(grunt) {
             platform: 'ios'
         }
       },
+      run: {
+        command: 'run'
+      }
       spec_android: {
         command: 'spec',
         options: {
@@ -82,13 +85,13 @@ module.exports = function(grunt) {
         command: "titanium build -p ios -S 6.1 -Y iphone" 
       },
       iphone7: {
-        command: "titanium build -p ios -S 7.0 -Y iphone" 
+        command: "titanium build -p ios -S 7.1 -Y iphone" 
       },
       ipad6: {
         command: "titanium build -p ios -S 6.1 -Y ipad" 
       },
       ipad7: {
-        command: "titanium build -p ios -S 7.0 -Y ipad" 
+        command: "titanium build -p ios -S 7.1 -Y ipad" 
       },
       adhoc: {
         command: 'ti build -p ios -F <%= ios_family %> -T dist-adhoc -R "<%= ios_adhoc_name %>" -P" <%= ios_adhoc_profile %>"  -O ~/Desktop ' 
@@ -111,6 +114,10 @@ module.exports = function(grunt) {
       android: {
         files: ['i18n/**', 'app/**/*.js', 'app/**/*.jade', 'app/**/*.ltss', 'app/assets/**', 'app/lib/**'],
         tasks: ['build','tishadow:run_android']
+      },
+      all: {
+        files: ['i18n/**', 'app/**/*.js', 'app/**/*.jade', 'app/**/*.ltss', 'app/assets/**', 'app/lib/**'],
+        tasks: ['build','tishadow:run']
       }
     },
     clean: {
@@ -125,6 +132,7 @@ module.exports = function(grunt) {
   grunt.registerTask('build', ['jade','ltss']);
   grunt.registerTask('dev_ios', ['build','tishadow:run_ios','watch:ios']);
   grunt.registerTask('dev_android', ['build','tishadow:run_android','watch:android']);
+  grunt.registerTask('dev_all', ['build','tishadow:run','watch:all']);
   grunt.registerTask('test_ios', ['tishadow:clear','build','tishadow:spec_ios']);
   grunt.registerTask('test_android', ['tishadow:clear','build','tishadow:spec_android']);
   //titanium cli tasks
