@@ -54,7 +54,7 @@ module.exports = function(grunt) {
       },
       run: {
         command: 'run'
-      }
+      },
       spec_android: {
         command: 'spec',
         options: {
