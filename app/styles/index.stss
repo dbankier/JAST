@@ -1,4 +1,4 @@
-@import "bootstrap.stss";
+@import "_bootstrap.stss";
 
 $color1: 'white';
 $color2: 'blue';
