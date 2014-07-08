@@ -11,8 +11,8 @@
   "license": "MIT",
   "readmeFilename": "README.md",
   "devDependencies": {
-    "grunt-ltss": "~0.1.2",
     "grunt-tishadow": "dbankier/grunt-tishadow",
+    "grunt-stss": "^0.1.0",
     "grunt-contrib-jade": "~0.8.0",
     "grunt-contrib-watch": "~0.5.1",
     "grunt": "~0.4.1",

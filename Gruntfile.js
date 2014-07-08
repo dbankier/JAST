@@ -25,15 +25,15 @@ module.exports = function(grunt) {
         }]
       }
     },
-    ltss: {
+    stss: {
       compile: {
         files: [{
           expand: true,
-          src: ['**/*.ltss','!**/includes/**'],
+          src: ['**/*.stss','!**/_*.stss'],
           dest: 'app',
           cwd: 'app',
           ext: '.tss'
-        }]
+        }],
       }
     },
     tishadow: {
@@ -108,15 +108,15 @@ module.exports = function(grunt) {
         nospawn: true
       },
       ios: {
-        files: ['i18n/**', 'app/**/*.js', 'app/**/*.jade', 'app/**/*.ltss', 'app/assets/**', 'app/lib/**'],
+        files: ['i18n/**', 'app/**/*.js', 'app/**/*.jade', 'app/**/*.stss', 'app/assets/**', 'app/lib/**'],
         tasks: ['build','tishadow:run_ios']
       },
       android: {
-        files: ['i18n/**', 'app/**/*.js', 'app/**/*.jade', 'app/**/*.ltss', 'app/assets/**', 'app/lib/**'],
+        files: ['i18n/**', 'app/**/*.js', 'app/**/*.jade', 'app/**/*.stss', 'app/assets/**', 'app/lib/**'],
         tasks: ['build','tishadow:run_android']
       },
       all: {
-        files: ['i18n/**', 'app/**/*.js', 'app/**/*.jade', 'app/**/*.ltss', 'app/assets/**', 'app/lib/**'],
+        files: ['i18n/**', 'app/**/*.js', 'app/**/*.jade', 'app/**/*.stss', 'app/assets/**', 'app/lib/**'],
         tasks: ['build','tishadow:run']
       }
     },
@@ -129,7 +129,7 @@ module.exports = function(grunt) {
 
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
   grunt.registerTask('default', 'build');
-  grunt.registerTask('build', ['jade','ltss']);
+  grunt.registerTask('build', ['jade','stss']);
   grunt.registerTask('dev_ios', ['build','tishadow:run_ios','watch:ios']);
   grunt.registerTask('dev_android', ['build','tishadow:run_android','watch:android']);
   grunt.registerTask('dev_all', ['build','tishadow:run','watch:all']);
@@ -146,9 +146,9 @@ module.exports = function(grunt) {
     if (filepath.match(/.jade$/) && filepath.indexOf("includes") === -1) {
       o[filepath.replace(".jade",".xml")] = [filepath];
       grunt.config.set(['jade', 'compile', 'files'],o);
-    } else if (filepath.match(/.ltss$/) && filepath.indexOf("includes") === -1){
-      o[filepath.replace(".ltss",".tss")] = [filepath];
-      grunt.config.set(['ltss', 'compile', 'files'],o);
+    } else if (filepath.match(/.stss$/) && filepath.indexOf("includes") === -1){
+      o[filepath.replace(".stss",".tss")] = [filepath];
+      grunt.config.set(['stss', 'compile', 'files'],o);
     }
   });
 };

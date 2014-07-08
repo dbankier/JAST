@@ -1,0 +1,19 @@
+@import "bootstrap.stss";
+
+$color1: 'white';
+$color2: 'blue';
+
+.container {
+	backgroundColor: $color1;
+}
+
+Label {
+  @include padding(80dp);
+	color: $color1;
+  font: {
+    size: 33dp;
+    weight: bold;
+  };
+  backgroundColor: $color2;
+  textAlign: center;
+} 

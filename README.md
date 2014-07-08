@@ -1,18 +1,16 @@
-# JALT Stack
+# JAST Stack
 
-![JALT logo](http://github.com/dbankier/jalt/raw/master/jalt.png)
-
-JALT is a boilerplate with a  mash of tools for rapid Alloy development. Let's be opinionated then. The stack includes:
+JAST is a boilerplate with a  mash of tools for rapid Alloy development. Let's be opinionated then. The stack includes:
 
  * [Alloy](http://projects.appcelerator.com/alloy/docs/Alloy-bootstrap/index.html) -
    Appcelerator's own MVC Framework
  * [Jade](http://jade-lang.com/) - the [best](http://www.yydigital.com/blog/2013/7/10/A_Case_For_Jade_With_Alloy) template
    engine for alloy views
- * [ltss](https://github.com/dbankier/ltss) - a less-like alloy tss pre-compiler.
+ * [STSS](https://github.com/RonaldTreur/STSS) - Sassy TSS, or Sassy Titanium Style Sheets.
  * [TiShadow](http://tishadow.yydigital.com/) - the fastest __Open Source__ toolset
    for titanium development.
 
-See the following (outdated) [demo](http://www.youtube.com/watch?v=c1u92zT-oA4).
+See the following (outdated) [demo](http://www.youtube.com/watch?v=c1u92zT-oA4) - it uses LTSS instead of STSS but you'll get the idea..
 
 If you would like coffee with that see [grunt-titanium-tishadow](https://github.com/xissy/grunt-titanium-tishadow).
 
@@ -32,6 +30,8 @@ If you would like coffee with that see [grunt-titanium-tishadow](https://github.
  * Install the dependencies: `npm install -d` 
 
 ## Use the [Yeoman](http://yeoman.io) generator: [generator-jalt](https://github.com/dbankier/generator-jalt)
+
+_NOTE_: The Yeoman generator still uses LTSS instead of STSS but will be updated soon to make it switchable.
 
 ``` 
  npm install -g yo generator-jalt

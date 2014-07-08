@@ -1,0 +1,6 @@
+@mixin padding ($pad) {
+  top: $pad;
+  bottom: $pad;
+  left: $pad;
+  right: $pad;
+}
