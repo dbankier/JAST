@@ -29,14 +29,12 @@ If you would like coffee with that see [grunt-titanium-tishadow](https://github.
  * Clone the repository
  * Install the dependencies: `npm install -d` 
 
-## Use the [Yeoman](http://yeoman.io) generator: [generator-jalt](https://github.com/dbankier/generator-jalt)
-
-_NOTE_: The Yeoman generator still uses LTSS instead of STSS but will be updated soon to make it switchable.
+## Use the [Yeoman](http://yeoman.io) generator: [generator-alloy](https://github.com/dbankier/generator-alloy)
 
 ``` 
- npm install -g yo generator-jalt
+ npm install -g yo generator-alloy
  mkdir /path/to/new/app && cd $_
- yo jalt
+ yo alloy 
 ```
 
 # Commands
