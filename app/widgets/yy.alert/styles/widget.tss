@@ -1,0 +1,50 @@
+"#alert": {
+	backgroundColor: "transparent",
+	backgroundImage: "null",
+	opacity: 1,
+	navBarHidden: true,
+	modal: false
+},
+".alert_black": {
+	backgroundColor: "black",
+	opacity: 0.5
+},
+".alert_background": {
+	backgroundColor: "white",
+	height: 220,
+	left: 20,
+	right: 20
+},
+"#alert_title": {
+	top: 30,
+	left: 20,
+	right: 20,
+	height: 30,
+	font: {
+		fontSize: 22,
+		fontWeight: "bold"
+	}
+},
+".alert_scroll": {
+	contentHeight: "auto",
+	top: 80,
+	left: 20,
+	right: 20,
+	height: 70,
+	showVerticalScrollIndicator: true
+},
+"#alert_content": {
+	width: Ti.UI.FILL,
+	color: "black",
+	top: 0,
+	font: {
+		fontSize: 16
+	}
+},
+"#buttonArea": {
+	bottom: 20,
+	left: 20,
+	right: 20,
+	layout: "horizontal",
+	height: 40
+}

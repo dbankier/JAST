@@ -1,0 +1,13 @@
+
+<Alloy>
+  <Window id="alert">
+    <View class="alert_black"></View>
+    <View id="back" class="alert_background">
+      <Label id="alert_title"></Label>
+      <ScrollView class="alert_scroll">
+        <Label id="alert_content"></Label>
+      </ScrollView>
+      <View id="buttonArea"></View>
+    </View>
+  </Window>
+</Alloy>
