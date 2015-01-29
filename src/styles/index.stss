@@ -1,0 +1,16 @@
+@import "_bootstrap.stss";
+
+.form {
+  @include padding(20);
+  top: 50;
+  layout: vertical;
+}
+
+TextField {
+  top: 5;
+  text-align: center;
+}
+Button {
+  top: 10;
+  width: Ti.UI.FILL
+}

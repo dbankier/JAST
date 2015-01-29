@@ -4,3 +4,9 @@
   left: $pad;
   right: $pad;
 }
+@mixin side-padding($pad) {
+  left: $pad;
+  right: $pad;
+}
+
+

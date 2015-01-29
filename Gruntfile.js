@@ -20,7 +20,7 @@ module.exports = function(grunt) {
           expand: true,
           src: ['**/*.jade','!**/includes/**','!**/templates/**'],
           dest: 'app',
-          cwd: 'app',
+          cwd: 'src',
           ext: '.xml'
         }]
       }
@@ -31,9 +31,23 @@ module.exports = function(grunt) {
           expand: true,
           src: ['**/*.stss','!**/_*.stss'],
           dest: 'app',
-          cwd: 'app',
+          cwd: 'src',
           ext: '.tss'
         }],
+      }
+    },
+    "6to5" : {
+      options: {
+        sourceMap: false
+      },
+      dist: {
+        files: [{
+          expand: true,
+          src: ['**/*.js'],
+          dest: 'app',
+          cwd: 'src',
+          ext: '.js'
+        }]
       }
     },
     tishadow: {
@@ -49,7 +63,7 @@ module.exports = function(grunt) {
       run_ios:{
         command: 'run',
         options: {
-            platform: 'ios'
+          platform: 'ios'
         }
       },
       run: {
@@ -108,28 +122,28 @@ module.exports = function(grunt) {
         nospawn: true
       },
       ios: {
-        files: ['i18n/**', 'app/**/*.js', 'app/**/*.jade', 'app/**/*.stss', 'app/assets/**', 'app/lib/**'],
+        files: ['i18n/**', 'src/**/*.js', 'app/**/*.js', 'src/**/*.jade', 'src/**/*.stss', 'app/assets/**', 'app/lib/**'],
         tasks: ['build','tishadow:run_ios']
       },
       android: {
-        files: ['i18n/**', 'app/**/*.js', 'app/**/*.jade', 'app/**/*.stss', 'app/assets/**', 'app/lib/**'],
+        files: ['i18n/**', 'src/**/*.js', 'app/**/*.js', 'src/**/*.jade', 'src/**/*.stss', 'app/assets/**', 'app/lib/**'],
         tasks: ['build','tishadow:run_android']
       },
       all: {
-        files: ['i18n/**', 'app/**/*.js', 'app/**/*.jade', 'app/**/*.stss', 'app/assets/**', 'app/lib/**'],
+        files: ['i18n/**', 'src/**/*.js', 'app/**/*.js', 'src/**/*.jade', 'src/**/*.stss', 'app/assets/**', 'app/lib/**'],
         tasks: ['build','tishadow:run']
       }
     },
     clean: {
       project: {
-        src: ['app/views/**/*.xml', 'app/styles/**/*.tss', 'Resources/', 'build/']
+        src: ['app/controllers/', 'app/views/', 'app/styles/', 'Resources/', 'build/']
       }
     }
   });
 
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
   grunt.registerTask('default', 'build');
-  grunt.registerTask('build', ['jade','stss']);
+  grunt.registerTask('build', ['jade','stss', '6to5']);
   grunt.registerTask('dev_ios', ['build','tishadow:run_ios','watch:ios']);
   grunt.registerTask('dev_android', ['build','tishadow:run_android','watch:android']);
   grunt.registerTask('dev_all', ['build','tishadow:run','watch:all']);
@@ -139,12 +153,15 @@ module.exports = function(grunt) {
   ['iphone6','iphone7','ipad6','ipad7','appstore','adhoc','playstore'].forEach(function(target) {
     grunt.registerTask(target, ['build','shell:'+target]);
   });
-   
+
   //only modify changed file
   grunt.event.on('watch', function(action, filepath) {
     var o = {};
-    if (filepath.match(/.jade$/) && filepath.indexOf("includes") === -1) {
-      o[filepath.replace(".jade",".xml")] = [filepath];
+    if (filepath.match(/.js/)) {
+      o[filepath.replace("src/", "app/")] = [filepath];
+      grunt.config.set(['6to5', 'files'],o);
+    } else if (filepath.match(/.jade$/) && filepath.indexOf("includes") === -1) {
+      o[filepath.replace(".jade",".xml").replace("src/","app/")] = [filepath];
       grunt.config.set(['jade', 'compile', 'files'],o);
     } else if (filepath.match(/.stss$/) && filepath.indexOf("includes") === -1){
       if (filepath.match(/\/_.*?\.stss/)) { // if it is partial then recompile all stss
@@ -153,11 +170,11 @@ module.exports = function(grunt) {
           expand: true,
           src: ['**/*.stss','!**/_*.stss'],
           dest: 'app',
-          cwd: 'app',
+          cwd: 'src',
           ext: '.tss'
         }]);
       } else {
-        o[filepath.replace(".stss",".tss")] = [filepath];
+        o[filepath.replace(".stss",".tss").replace("src/","app/")] = [filepath];
         grunt.config.set(['stss', 'compile', 'files'],o);
       }
     }

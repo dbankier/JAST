@@ -1,0 +1,9 @@
+include includes/ui
+
+Alloy
+  Window.container
+    View.form
+      TextField.login(value="{{username}}")
+      TextField.password(value="{{password}}")
+      Button(onClick="login") Login In
+  

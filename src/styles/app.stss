@@ -1,0 +1,90 @@
+@import "_colors.stss";
+@import "_bootstrap.stss";
+
+Button {
+  background-color: $dark;
+  height: 50;
+  color: "white";
+}
+SearchBar {
+  barColor: $lighter;
+}
+Window {
+  tintColor: $white;
+  barColor: $medium;
+  background-color: $light;
+}
+TabGroup {
+  tintColor: $white;
+  barColor: $medium;
+  background-color: $lighter;
+  activeTabIconTint: $dark;
+}
+TextField {
+  background-color: $white;
+  color: $darker;
+  width: Ti.UI.FILL;
+  height: 50;
+}
+
+ScrollView {
+  contentHeight: auto
+}
+
+Label {
+  color: $black;
+}
+
+TextArea{
+  height: 100;
+}
+.label {
+  top: 5;
+  @include side-padding(10);
+  color: $light;
+  font: {size: 12};
+}
+.heading {
+  top: 15;
+  @include side-padding(10);
+  color: $dark;
+  font: {size: 22};
+}
+.field {
+  top: 2;
+  @include side-padding(10);
+  color: $black;
+  font: {
+    size: 18;
+  }
+}
+.text {
+  borderColor: #ccc;
+  color: $black;
+}
+.icon {
+  color: $dark;
+}
+.back_view {
+  background-color: $light;
+}
+
+.password {
+  passwordMask: true;
+  hintText: "Password";
+}
+.login {
+  hintText: "Login";
+  keyboardType: Titanium.UI.KEYBOARD_EMAIL;
+}
+
+.inside {
+  height: Ti.UI.SIZE;
+  width: Ti.UI.SIZE;
+  layout: 'horizontal';
+}
+
+ListView {
+  background-color: $white;
+  separatorColor: $light;
+}

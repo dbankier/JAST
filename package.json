@@ -11,14 +11,19 @@
   "license": "MIT",
   "readmeFilename": "README.md",
   "devDependencies": {
-    "grunt-tishadow": "dbankier/grunt-tishadow",
-    "grunt-stss": "^0.1.0",
+    "grunt": "~0.4.1",
+    "grunt-6to5": "^2.0.0",
+    "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-jade": "~0.8.0",
     "grunt-contrib-watch": "~0.5.1",
-    "grunt": "~0.4.1",
-    "grunt-contrib-clean": "~0.5.0",
+    "grunt-notify": "~0.2.14",
     "grunt-shell": "~0.5.0",
-    "matchdep": "~0.3.0",
-    "grunt-notify": "~0.2.14"
+    "grunt-stss": "^0.1.0",
+    "grunt-tishadow": "dbankier/grunt-tishadow",
+    "matchdep": "~0.3.0"
+  },
+  "dependencies": {
+    "nano": "^6.0.2",
+    "ti-nano": "^0.1.0"
   }
 }

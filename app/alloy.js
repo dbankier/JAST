@@ -9,3 +9,17 @@
 // object. For example:
 //
 // Alloy.Globals.someGlobalFunction = function(){};
+var XHR = require("XHR");
+var nano = require("nano");
+var xhr = new XHR();
+xhr.clean();
+var server = "http://localhost:3000";
+Alloy.Globals.xhrGet = function(path, callback, onerror,options) {
+  xhr.get(server + path, callback,onerror, options||{});
+};
+Alloy.Globals.xhrPost = function(path, data, callback, onerror, options) {
+  xhr.post(server + path, data, callback,onerror, options || {});
+};
+Alloy.Globals.xhr = xhr;
+Alloy.Globals.loading = Alloy.createWidget("nl.fokkezb.loading");
+Alloy.Globals.alert = Alloy.createWidget("yy.alert");
