@@ -1,0 +1,13 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">  
+  <style name="Theme.JAST" parent="Theme.AppCompat">
+    <item name="android:actionBarStyle">@style/Theme.JAST.ActionBar</item>
+    <!--  <item name="android:typeface">serif</item> -->
+  </style>         
+
+  <style name="Theme.JAST.ActionBar" parent="android:style/Widget.Holo.Light.ActionBar">
+    <item name="android:background">#277553</item>
+    <item name="android:backgroundStacked">#277553</item>
+    <item name="android:backgroundSplit">#277553</item>
+  </style>        
+
+</resources>
