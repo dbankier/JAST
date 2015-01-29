@@ -1,0 +1,5 @@
+<Alloy>
+	<Window id="win" class="loadingWindow" onFocus="onFocus" onBlur="onBlur">
+		<Widget id="view" src="nl.fokkezb.loading" name="view" onCancel="hide" />
+	</Window>
+</Alloy>
