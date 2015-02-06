@@ -180,7 +180,7 @@ module.exports = function(grunt) {
       o[target] = [filepath];
       grunt.config.set(['6to5', 'dist', 'files'],o);
       if (filepath.match(/alloy\.js$/)) {
-        grunt.config.set(['tishadow', 'options', 'alloyCompileFile'],false);
+        grunt.config.set(['tishadow', 'options'],{update: true});
       } else {
         grunt.config.set(['tishadow', 'options', 'alloyCompileFile'],target);
       }
@@ -199,12 +199,12 @@ module.exports = function(grunt) {
           cwd: 'src',
           ext: '.tss'
         }]);
-        grunt.config.set(['tishadow', 'options', 'alloyCompileFile'],false);
+        grunt.config.set(['tishadow', 'options'],{update: true});
       } else {
         var target = filepath.replace(".stss",".tss").replace("src/","app/");
         o[target] = [filepath];
         if (filepath.match(/app\.stss$/)) {
-          grunt.config.set(['tishadow', 'options', 'alloyCompileFile'],false);
+          grunt.config.set(['tishadow', 'options'],{update: true});
         } else {
           grunt.config.set(['tishadow', 'options', 'alloyCompileFile'],target);
         }
@@ -216,12 +216,12 @@ module.exports = function(grunt) {
       grunt.config.set(['tishadow', 'options', 'alloyCompileFile'],target);
       grunt.config.set(['copy','alloy','files'],o);
     } else { 
-      grunt.config.set(['tishadow', 'options', 'alloyCompileFile'], false);
+      grunt.config.set(['tishadow', 'options'],{update: true});
     }
 
     // override if opting out of selective compilation
     if (!grunt.config.get("boost")) {
-      grunt.config.set(['tishadow', 'options', 'alloyCompileFile'], false);
+      grunt.config.set(['tishadow', 'options'],{update: true});
     };
   });
 };
