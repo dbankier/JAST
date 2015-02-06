@@ -42,7 +42,7 @@ If you would like coffee with that see [grunt-titanium-tishadow](https://github.
 
 ## Use the [Yeoman](http://yeoman.io) generator: [generator-alloy](https://github.com/dbankier/generator-alloy)
 
-** NEEDS UPDATING **
+** NEEDS UPDATING - OUTDATED**
 ``` 
  npm install -g yo generator-alloy
  mkdir /path/to/new/app && cd $_
@@ -51,14 +51,20 @@ If you would like coffee with that see [grunt-titanium-tishadow](https://github.
 
 # Structure
 
-Use the `src` directory for the `controller`, `styles` and `view`.
-`widgets`, `assests` and `lib` are still in the `app` directory.
+Make **ALL** changes in the `src` directory.
+The **ENTIRE** `app` directory will be cleaned on `grunt clean`.
+
+# Configuration
+
+The configuration is at the head of the `Gruntfile.js`.
+
+Of note, if you want to use selective alloy compilation, then use alloy from master and set `boost` to `true` in the `Gruntfile.js`.
 
 # Commands
 
- * `grunt` - compiles the jade, stss and es6 files
- * `grunt [dev_android|dev_ios]` - auto compile and pushes with TiShadow
- * `grunt [test_android|test_ios]` - run specs 
+ * `grunt` - compiles the jade, stss and es6 files and copies all the assets from `src` to `app`
+ * `grunt dev [-p <platform>]` - auto compile and pushes with TiShadow (`p` flag is optional)
+ * `grunt test [-p <plaform>]` - run specs  (`p` flag is optional)
  * `grunt clean` - deletes all generated files
  * `grunt [iphone6|iphone7|ipad6|ipad7|appstore|adhoc|playstore]` - commands inspired by the work
     of @FokkeZB on [TiNy](https://github.com/FokkeZB/tn). Project specific settings are configured at
@@ -70,7 +76,6 @@ You probably want to using these commands after you run grunt the first time.
 ts server
 ti build -p ios --appify
 ~~~
-
 
 
 License: MIT

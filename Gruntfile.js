@@ -1,6 +1,9 @@
 module.exports = function(grunt) {
   grunt.initConfig({
 
+    // if true, it will use selective alloy compilation
+    boost: false,
+
     // Project Specific Definitions
     ios_family: "universal",
     ios_adhoc_name: "David Bankier",
@@ -54,34 +57,20 @@ module.exports = function(grunt) {
       options: {
         update: true,
       },
-      run_android: {
-        command: 'run',
-        options: {
-          platform: 'android'
-        }
-      },
-      run_ios:{
-        command: 'run',
-        options: {
-          platform: 'ios'
-        }
-      },
       run: {
-        command: 'run'
+        command: 'run',
+        options: grunt.option("p") ? {
+          platform: grunt.option("p")
+        }: {}
       },
-      spec_android: {
-        command: 'spec',
+      spec: {
         options: {
           update: false,
-          platform: ['android'],
-        }
-      },
-      spec_ios:{
+        },
         command: 'spec',
-        options: {
-          update: false,
-          platform: ['ios'],
-        }
+        options: grunt.option("p") ? {
+          platform: grunt.option("p")
+        }:{}
       },
       clear: {
         command: 'clear',
@@ -121,34 +110,63 @@ module.exports = function(grunt) {
       options: {
         nospawn: true
       },
-      ios: {
-        files: ['i18n/**', 'src/**/*.js', 'app/**/*.js', 'src/**/*.jade', 'src/**/*.stss', 'app/assets/**', 'app/lib/**'],
-        tasks: ['build','tishadow:run_ios']
+      views: {
+        files: ['src/**/*.jade'],
+        tasks: ['jade','tishadow:run']
       },
-      android: {
-        files: ['i18n/**', 'src/**/*.js', 'app/**/*.js', 'src/**/*.jade', 'src/**/*.stss', 'app/assets/**', 'app/lib/**'],
-        tasks: ['build','tishadow:run_android']
+      styles: {
+        files: ['src/**/*.stss'],
+        tasks: ['stss','tishadow:run']
       },
-      all: {
-        files: ['i18n/**', 'src/**/*.js', 'app/**/*.js', 'src/**/*.jade', 'src/**/*.stss', 'app/assets/**', 'app/lib/**'],
-        tasks: ['build','tishadow:run']
+      javascripts: {
+        files: ['src/**/*.js'],
+        tasks: ['6to5','tishadow:run']
+      },
+      assets: {
+        files: ['src/**', '!src/**/*.jade', '!src/**/*.stss', '!src/**/*.js'],
+        tasks: ['copy:alloy','tishadow:run']
+      },
+      locale: {
+        files: ['i18n/**'],
+        tasks: ['tishadow:run']
+      }
+    },
+    concurrent: {
+      options: {
+        logConcurrentOutput: true,
+      },
+      watch: {
+        tasks: ['watch:views','watch:styles', 'watch:javascripts', 'watch:assets', 'watch:locale']
+      }
+    },
+    copy: {
+      alloy: {
+        files: [{
+          expand: true,
+          dot: true,
+          cwd: 'src/',
+          dest: 'app/',
+          src: [
+            '**',
+            '!**/*.jade',
+            '!**/*.stss'
+          ]
+        }
+        ]
       }
     },
     clean: {
       project: {
-        src: ['app/controllers/', 'app/views/', 'app/styles/', 'Resources/', 'build/']
+        src: ['app/', 'Resources/', 'build/']
       }
     }
   });
 
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
   grunt.registerTask('default', 'build');
-  grunt.registerTask('build', ['jade','stss', '6to5']);
-  grunt.registerTask('dev_ios', ['build','tishadow:run_ios','watch:ios']);
-  grunt.registerTask('dev_android', ['build','tishadow:run_android','watch:android']);
-  grunt.registerTask('dev_all', ['build','tishadow:run','watch:all']);
-  grunt.registerTask('test_ios', ['tishadow:clear','build','tishadow:spec_ios']);
-  grunt.registerTask('test_android', ['tishadow:clear','build','tishadow:spec_android']);
+  grunt.registerTask('build', ['copy:alloy', 'jade','stss', '6to5']);
+  grunt.registerTask('dev', ['build','tishadow:run','concurrent:watch']);
+  grunt.registerTask('test', ['tishadow:clear','build','tishadow:spec']);
   //titanium cli tasks
   ['iphone6','iphone7','ipad6','ipad7','appstore','adhoc','playstore'].forEach(function(target) {
     grunt.registerTask(target, ['build','shell:'+target]);
@@ -158,11 +176,19 @@ module.exports = function(grunt) {
   grunt.event.on('watch', function(action, filepath) {
     var o = {};
     if (filepath.match(/.js/)) {
-      o[filepath.replace("src/", "app/")] = [filepath];
-      grunt.config.set(['6to5', 'files'],o);
+      var target = filepath.replace("src/", "app/");
+      o[target] = [filepath];
+      grunt.config.set(['6to5', 'dist', 'files'],o);
+      if (filepath.match(/alloy\.js$/)) {
+        grunt.config.set(['tishadow', 'options', 'alloyCompileFile'],false);
+      } else {
+        grunt.config.set(['tishadow', 'options', 'alloyCompileFile'],target);
+      }
     } else if (filepath.match(/.jade$/) && filepath.indexOf("includes") === -1) {
-      o[filepath.replace(".jade",".xml").replace("src/","app/")] = [filepath];
+      var target  = filepath.replace(".jade",".xml").replace("src/","app/");
+      o[target] = [filepath];
       grunt.config.set(['jade', 'compile', 'files'],o);
+      grunt.config.set(['tishadow', 'options', 'alloyCompileFile'],target);
     } else if (filepath.match(/.stss$/) && filepath.indexOf("includes") === -1){
       if (filepath.match(/\/_.*?\.stss/)) { // if it is partial then recompile all stss
         grunt.log.write("Partial modified, rewriting all styles");
@@ -173,10 +199,29 @@ module.exports = function(grunt) {
           cwd: 'src',
           ext: '.tss'
         }]);
+        grunt.config.set(['tishadow', 'options', 'alloyCompileFile'],false);
       } else {
-        o[filepath.replace(".stss",".tss").replace("src/","app/")] = [filepath];
+        var target = filepath.replace(".stss",".tss").replace("src/","app/");
+        o[target] = [filepath];
+        if (filepath.match(/app\.stss$/)) {
+          grunt.config.set(['tishadow', 'options', 'alloyCompileFile'],false);
+        } else {
+          grunt.config.set(['tishadow', 'options', 'alloyCompileFile'],target);
+        }
         grunt.config.set(['stss', 'compile', 'files'],o);
       }
+    } else if (filepath.match(/^src/)){
+      var target = filepath.replace("src/", "app/");
+      o[target] = [filepath];
+      grunt.config.set(['tishadow', 'options', 'alloyCompileFile'],target);
+      grunt.config.set(['copy','alloy','files'],o);
+    } else { 
+      grunt.config.set(['tishadow', 'options', 'alloyCompileFile'], false);
     }
+
+    // override if opting out of selective compilation
+    if (!grunt.config.get("boost")) {
+      grunt.config.set(['tishadow', 'options', 'alloyCompileFile'], false);
+    };
   });
 };

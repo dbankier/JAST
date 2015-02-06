@@ -13,13 +13,15 @@
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-6to5": "^2.0.0",
+    "grunt-concurrent": "^1.0.0",
     "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-copy": "^0.7.0",
     "grunt-contrib-jade": "~0.8.0",
+    "grunt-contrib-tishadow": "^1.1.0",
     "grunt-contrib-watch": "~0.5.1",
     "grunt-notify": "~0.2.14",
     "grunt-shell": "~0.5.0",
     "grunt-stss": "^0.1.0",
-    "grunt-tishadow": "dbankier/grunt-tishadow",
     "matchdep": "~0.3.0"
   },
   "dependencies": {
