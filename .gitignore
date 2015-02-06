@@ -1,6 +1,7 @@
 .DS_Store
 build.log
 build
+app
 npm-debug.log
 tmp
 node_modules
