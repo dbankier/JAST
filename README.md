@@ -39,8 +39,12 @@ If you would like coffee with that see [grunt-titanium-tishadow](https://github.
 
 ## Manually
 
- * Clone the repository
- * Install the dependencies: `npm install -d` 
+ * clone the repo (again)
+ * `npm install`
+ * `grunt` - to compile the files the first time
+ * In a separate terminal window `ts server`
+ * `ts build -p ios --appify`
+ * `grunt dev -p ios`
 
 ## Use the [Yeoman](http://yeoman.io) generator: [generator-alloy](https://github.com/dbankier/generator-alloy)
 
@@ -70,12 +74,6 @@ The configuration is at the head of the `Gruntfile.js`.
     of @FokkeZB on [TiNy](https://github.com/FokkeZB/tn). Project specific settings are configured at
     the top of the `Gruntfile.js`.
 
-You probably want to using these commands after you run grunt the first time.
-
-~~~
-ts server
-ti build -p ios --appify
-~~~
 
 
 License: MIT
