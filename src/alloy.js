@@ -11,6 +11,8 @@
 // Alloy.Globals.someGlobalFunction = function(){};
 var XHR = require("XHR");
 var nano = require("nano");
+nano.syntax(/\-\=(.+?)\=\-/gi);
+
 var xhr = new XHR();
 xhr.clean();
 var server = "http://localhost:3000";
