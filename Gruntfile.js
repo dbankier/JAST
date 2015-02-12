@@ -1,3 +1,10 @@
+// titanium build targets,
+var ti_args= {
+  ios: ['-p','ios','-T', 'simulator', '--device-id','8E26A87B-E777-46D8-BDE4-D8B8CE3716A2'],
+  android: ['-p','android', '-T','device'],
+  default: ['-p','ios'] 
+};
+
 module.exports = function(grunt) {
   grunt.initConfig({
 
@@ -70,6 +77,9 @@ module.exports = function(grunt) {
           platform: grunt.option("p")
         }:{}
       },
+      server: {
+        command: 'server'
+      },
       clear: {
         command: 'clear',
         options: {
@@ -81,18 +91,6 @@ module.exports = function(grunt) {
       options: {
         stdout: true,
         stderr: true
-      },
-      iphone6: {
-        command: "titanium build -p ios -S 6.1 -Y iphone" 
-      },
-      iphone7: {
-        command: "titanium build -p ios -S 7.1 -Y iphone" 
-      },
-      ipad6: {
-        command: "titanium build -p ios -S 6.1 -Y ipad" 
-      },
-      ipad7: {
-        command: "titanium build -p ios -S 7.1 -Y ipad" 
       },
       adhoc: {
         command: 'ti build -p ios -F <%= ios_family %> -T dist-adhoc -R "<%= ios_adhoc_name %>" -P" <%= ios_adhoc_profile %>"  -O ~/Desktop ' 
@@ -130,10 +128,10 @@ module.exports = function(grunt) {
         logConcurrentOutput: true,
       },
       run: {
-        tasks: ['tishadow:run', 'watch:views','watch:styles', 'watch:javascripts', /*'watch:assets',*/ ]
+        tasks: ['tishadow:server','titanium:appify','tishadow:run', 'watch:views','watch:styles', 'watch:javascripts', /*'watch:assets',*/ ]
       },
       spec: {
-        tasks: ['tishadow:spec', 'watch:views','watch:styles', 'watch:javascripts', /*'watch:assets',*/ ]
+        tasks: ['tishadow:server','titanium:appify', 'tishadow:spec', 'watch:views','watch:styles', 'watch:javascripts', /*'watch:assets',*/ ]
       }
     },
     copy: {
@@ -152,6 +150,14 @@ module.exports = function(grunt) {
         ]
       }
     },
+    titanium: {
+      appify: {
+        options:  {
+          command: 'build',
+          args: ti_args[grunt.option("p")||'default'].concat("--appify")
+        }
+      }
+    },
     clean: {
       project: {
         src: ['app/', 'Resources/', 'build/']
@@ -164,8 +170,9 @@ module.exports = function(grunt) {
   grunt.registerTask('build', ['copy:alloy', 'jade','stss', '6to5']);
   grunt.registerTask('dev', ['build','concurrent:run']);
   grunt.registerTask('test', ['tishadow:clear','build','tishadow:spec']);
+
   //titanium cli tasks
-  ['iphone6','iphone7','ipad6','ipad7','appstore','adhoc','playstore'].forEach(function(target) {
+  ['appstore','adhoc','playstore'].forEach(function(target) {
     grunt.registerTask(target, ['build','shell:'+target]);
   });
 

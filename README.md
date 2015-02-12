@@ -33,15 +33,21 @@ If you would like coffee with that see [grunt-titanium-tishadow](https://github.
 
 # Let's Go
 
+## Configuration
+
+The configuration is at the head of the `Gruntfile.js`.
+
+You **must** modify the `ti_args` values to suit your environment.
+The `ti info` command can help to get the correct ios simulator device id.
+
+You can optionally modify `Project Specific Definitions` section.
+
 ## Manually
 
  * `git clone https://github.com/dbankier/JAST.git`
  * `[sudo] npm install alloy tishadow`
  * `cd JAST && [sudo] npm install`
- * `grunt` - to compile the files the first time
- * `ts server` - starts up the server in your first tab
- * in another tab, run - `ts build -p ios --appify`
- * and then in another tab, run - `grunt dev -p ios`
+ * `grunt dev -p ios`
 
 ## Manual Install with Extras :+1:
 
@@ -56,10 +62,7 @@ You will need to install alloy and tishadow from master - follow these steps.
  * `[sudo] npm install -g git://github.com:dbankier/TiShadow.git`
  * `tishadow config --boost`
  * `cd JAST && [sudo] npm install`
- * `grunt` - to compile the files the first time
- * `ts server` - starts up the server in your first tab
- * in another tab, run - `ts build -p ios --appify`
- * and then in another tab, run - `grunt dev -p ios`
+ * `grunt dev -p ios`
 
 ## Use the [Yeoman](http://yeoman.io) generator: [generator-alloy](https://github.com/dbankier/generator-alloy)
 
@@ -77,10 +80,6 @@ If you want to use
 
 Make **ALL** changes in the `src` directory.
 The **ENTIRE** `app` directory will be cleaned on `grunt clean`.
-
-# Configuration
-
-The configuration is at the head of the `Gruntfile.js`.
 
 # Commands
 
