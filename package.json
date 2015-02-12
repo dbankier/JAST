@@ -1,12 +1,12 @@
 {
-  "name": "JALT",
+  "name": "JAST",
   "version": "0.0.1",
-  "description": "JALT is a boilerplate with a mash of tools for rapid Alloy development.",
+  "description": "JAST is a boilerplate with a mash of tools for rapid Alloy development.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": "https://github.com/dbankier/JALT",
+  "repository": "https://github.com/dbankier/JAST",
   "author": "David Bankier",
   "license": "MIT",
   "readmeFilename": "README.md",
@@ -17,7 +17,7 @@
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-copy": "^0.7.0",
     "grunt-contrib-jade": "~0.8.0",
-    "grunt-contrib-tishadow": "^1.1.0",
+    "grunt-contrib-tishadow": "^1.2.0",
     "grunt-contrib-watch": "~0.5.1",
     "grunt-notify": "~0.2.14",
     "grunt-shell": "~0.5.0",

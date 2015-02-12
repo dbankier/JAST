@@ -60,8 +60,6 @@ The **ENTIRE** `app` directory will be cleaned on `grunt clean`.
 
 The configuration is at the head of the `Gruntfile.js`.
 
-Of note, if you want to use selective alloy compilation, then use alloy from master and set `boost` to `true` in the `Gruntfile.js`.
-
 # Commands
 
  * `grunt` - compiles the jade, stss and es6 files and copies all the assets from `src` to `app`
