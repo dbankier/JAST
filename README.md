@@ -30,21 +30,27 @@ If you would like coffee with that see [grunt-titanium-tishadow](https://github.
 # Prerequisites
 
  * Do this:
+ * 
 ```
- [sudo] npm install alloy tishadow grunt-cli
+	[sudo] npm install -g git://github.com/appcelerator/alloy.git
+ 
+	[sudo] npm install -g git://github.com:dbankier/TiShadow.git
 ``` 
+
  * [Get started](http://tishadow.yydigital.com/getting%20started) with TiShadow
 
 # Let's Go
 
 ## Manually
 
- * clone the repo (again)
- * `npm install`
+ * `git clone https://github.com/dbankier/JAST.git`
+ * `[sudo] npm install -g git://github.com/appcelerator/alloy.git`
+ * `[sudo] npm install -g git://github.com:dbankier/TiShadow.git`
+ * `cd JAST && [sudo] npm install`
  * `grunt` - to compile the files the first time
- * In a separate terminal window `ts server`
- * `ts build -p ios --appify`
- * `grunt dev -p ios`
+ * `ts server` - starts up the server in your first tab
+ * in another tab, run - `ts build -p ios --appify`
+ * and then in another tab, run - `grunt dev -p ios`
 
 ## Use the [Yeoman](http://yeoman.io) generator: [generator-alloy](https://github.com/dbankier/generator-alloy)
 
