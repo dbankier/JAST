@@ -29,14 +29,6 @@ If you would like coffee with that see [grunt-titanium-tishadow](https://github.
 
 # Prerequisites
 
- * Do this:
- * 
-```
-	[sudo] npm install -g git://github.com/appcelerator/alloy.git
- 
-	[sudo] npm install -g git://github.com:dbankier/TiShadow.git
-``` 
-
  * [Get started](http://tishadow.yydigital.com/getting%20started) with TiShadow
 
 # Let's Go
@@ -44,8 +36,25 @@ If you would like coffee with that see [grunt-titanium-tishadow](https://github.
 ## Manually
 
  * `git clone https://github.com/dbankier/JAST.git`
+ * `[sudo] npm install alloy tishadow`
+ * `cd JAST && [sudo] npm install`
+ * `grunt` - to compile the files the first time
+ * `ts server` - starts up the server in your first tab
+ * in another tab, run - `ts build -p ios --appify`
+ * and then in another tab, run - `grunt dev -p ios`
+
+## Manual Install with Extras :+1:
+
+If you want to:
+ * use the `{{ }}` syntax in nano.
+ * use selective alloy compilation for super fast live reloads.
+
+You will need to install alloy and tishadow from master - follow these steps.
+
+ * `git clone https://github.com/dbankier/JAST.git`
  * `[sudo] npm install -g git://github.com/appcelerator/alloy.git`
  * `[sudo] npm install -g git://github.com:dbankier/TiShadow.git`
+ * `tishadow config --boost`
  * `cd JAST && [sudo] npm install`
  * `grunt` - to compile the files the first time
  * `ts server` - starts up the server in your first tab
@@ -60,6 +69,9 @@ If you would like coffee with that see [grunt-titanium-tishadow](https://github.
  mkdir /path/to/new/app && cd $_
  yo alloy 
 ```
+
+
+If you want to use 
 
 # Structure
 
