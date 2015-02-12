@@ -55,11 +55,11 @@ If you want to:
  * use the `{{ }}` syntax in nano.
  * use selective alloy compilation for super fast live reloads.
 
-You will need to install alloy and tishadow from master - follow these steps.
+You will need to install alloy from master and at least v.2.8.0 of tishadow - follow these steps.
 
  * `git clone https://github.com/dbankier/JAST.git`
  * `[sudo] npm install -g git://github.com/appcelerator/alloy.git`
- * `[sudo] npm install -g git://github.com:dbankier/TiShadow.git`
+ * `[sudo] npm install -g tishadow
  * `tishadow config --boost`
  * `cd JAST && [sudo] npm install`
  * `grunt dev -p ios`
