@@ -26,7 +26,5 @@
     "matchdep": "~0.3.0"
   },
   "dependencies": {
-    "nano": "^6.0.2",
-    "ti-nano": "^0.1.0"
   }
 }
