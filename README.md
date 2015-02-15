@@ -49,6 +49,9 @@ You can optionally modify `Project Specific Definitions` section.
  * `cd JAST && [sudo] npm install`
  * `grunt dev -p ios`
 
+**Note**: the `grunt dev` command will start the tishadow server and launch a tishadow appified version of your app.
+All code changes will be selectively precompiled and pushed (live-reload).
+
 ## Manual Install with Extras :+1:
 
 If you want to:
@@ -59,7 +62,7 @@ You will need to install alloy from master and at least v.2.8.0 of tishadow - fo
 
  * `git clone https://github.com/dbankier/JAST.git`
  * `[sudo] npm install -g git://github.com/appcelerator/alloy.git`
- * `[sudo] npm install -g tishadow
+ * `[sudo] npm install -g tishadow`
  * `tishadow config --boost`
  * `cd JAST && [sudo] npm install`
  * `grunt dev -p ios`
