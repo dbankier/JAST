@@ -43,7 +43,7 @@ module.exports = function(grunt) {
         }],
       }
     },
-    "6to5" : {
+    babel : {
       options: {
         sourceMap: false
       },
@@ -116,7 +116,7 @@ module.exports = function(grunt) {
       },
       javascripts: {
         files: ['src/**/*.js'],
-        tasks: ['6to5']
+        tasks: ['babel']
       },
       assets: {
         files: ['src/**', '!src/**/*.jade', '!src/**/*.stss', '!src/**/*.js'],
@@ -167,7 +167,7 @@ module.exports = function(grunt) {
 
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
   grunt.registerTask('default', 'build');
-  grunt.registerTask('build', ['copy:alloy', 'jade','stss', '6to5']);
+  grunt.registerTask('build', ['copy:alloy', 'jade','stss', 'babel']);
   grunt.registerTask('dev', ['build','concurrent:run']);
   grunt.registerTask('test', ['tishadow:clear','build','tishadow:spec']);
 
@@ -189,7 +189,7 @@ module.exports = function(grunt) {
     if (filepath.match(/.js/)) {
       var target = filepath.replace("src/", "app/");
       o[target] = [filepath];
-      grunt.config.set(['6to5', 'dist', 'files'],o);
+      grunt.config.set(['babel', 'dist', 'files'],o);
       if (!filepath.match(/alloy\.js$/)) {
         alloyCompileFile = target;
       }

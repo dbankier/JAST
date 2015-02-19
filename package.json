@@ -12,7 +12,7 @@
   "readmeFilename": "README.md",
   "devDependencies": {
     "grunt": "~0.4.1",
-    "grunt-6to5": "^2.0.0",
+    "grunt-babel": "^4.0.0",
     "grunt-concurrent": "^1.0.0",
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-copy": "^0.7.0",
@@ -25,6 +25,5 @@
     "grunt-titanium": "^0.3.1",
     "matchdep": "~0.3.0"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }

@@ -6,7 +6,7 @@ JAST is a boilerplate with a  mash of tools for rapid Alloy development. Let's b
 
  * [Alloy](http://projects.appcelerator.com/alloy/docs/Alloy-bootstrap/index.html) -
    Appcelerator's own MVC Framework
- * [6to5](https://6to5.org/) - to give us some ES6 support.
+ * [Babel](https://babeljs.io/) - to give us some ES6 support.
  * [Jade](http://jade-lang.com/) - the [best](http://www.yydigital.com/blog/2013/7/10/A_Case_For_Jade_With_Alloy) template
    engine for alloy views
  * [STSS](https://github.com/RonaldTreur/STSS) - Sassy TSS, or Sassy Titanium Style Sheets.
