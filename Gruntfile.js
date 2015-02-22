@@ -1,6 +1,6 @@
 // titanium build targets,
 var ti_args= {
-  ios: ['-p','ios','-T', 'simulator', '--device-id','8E26A87B-E777-46D8-BDE4-D8B8CE3716A2'],
+  ios: ['-p','ios','-T', 'simulator', '--device-id','F2B9C750-6BCC-4BC0-8CE8-A5D1FA30A036'],
   android: ['-p','android', '-T','device'],
   default: ['-p','ios'] 
 };
@@ -69,13 +69,13 @@ module.exports = function(grunt) {
         }: {}
       },
       spec: {
-        options: {
-          update: false,
-        },
         command: 'spec',
         options: grunt.option("p") ? {
-          platform: grunt.option("p")
-        }:{}
+          platform: grunt.option("p"),
+          update: false
+        }:{
+          update: false,
+        }
       },
       server: {
         command: 'server'
@@ -169,7 +169,7 @@ module.exports = function(grunt) {
   grunt.registerTask('default', 'build');
   grunt.registerTask('build', ['copy:alloy', 'jade','stss', 'babel']);
   grunt.registerTask('dev', ['build','concurrent:run']);
-  grunt.registerTask('test', ['tishadow:clear','build','tishadow:spec']);
+  grunt.registerTask('test', ['tishadow:clear','build','concurrent:spec']);
 
   //titanium cli tasks
   ['appstore','adhoc','playstore'].forEach(function(target) {
