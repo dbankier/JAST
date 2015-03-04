@@ -1,4 +1,6 @@
 var $model = {};
+var nano = require("nano");
+nano.syntax(/\-\=(.+?)\=\-/gi);
 nano($,$model);
 $.index.open();
 
