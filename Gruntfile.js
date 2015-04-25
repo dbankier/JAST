@@ -65,13 +65,13 @@ module.exports = function(grunt) {
       run: {
         command: 'run',
         options: grunt.option("p") ? {
-          platform: grunt.option("p")
+          platform: ti_args[grunt.option("p")][1]
         }: {}
       },
       spec: {
         command: 'spec',
         options: grunt.option("p") ? {
-          platform: grunt.option("p"),
+          platform: ti_args[grunt.option("p")][1],
           update: false
         }:{
           update: false,
@@ -182,7 +182,7 @@ module.exports = function(grunt) {
       update : true,
     };
     if(grunt.option("p")) {
-      ts_options.platform = grunt.option("p");
+      ts_options.platform = ti_args[grunt.option("p")][1];
     }
     var alloyCompileFile ; 
     var o = {};
