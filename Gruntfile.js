@@ -154,6 +154,7 @@ module.exports = function(grunt) {
       appify: {
         options:  {
           command: 'build',
+          platform: grunt.option("p"),
           args: ti_args[grunt.option("p")||'default'].concat("--appify")
         }
       }
