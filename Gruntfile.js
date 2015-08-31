@@ -1,8 +1,8 @@
 // titanium build targets,
 var ti_args= {
-  ios: ['-p','ios','-T', 'simulator', '--device-id','F2B9C750-6BCC-4BC0-8CE8-A5D1FA30A036'],
+  ios: ['-p','ios','-T', 'simulator', '--device-id','FB421A2C-9B7C-42DD-8790-BBB5F715BA32'],
   android: ['-p','android', '-T','device'],
-  default: ['-p','ios'] 
+  default: ['-p','ios']
 };
 
 module.exports = function(grunt) {
@@ -87,19 +87,22 @@ module.exports = function(grunt) {
       }
     },
     // titanium-cli commands in absence of a plugin
-    shell: { 
+    shell: {
       options: {
         stdout: true,
         stderr: true
       },
+      appify: {
+        command: ['ti', 'build'].concat(ti_args[grunt.option("p")||'default']).concat("--appify").join(" ")
+      },
       adhoc: {
-        command: 'ti build -p ios -F <%= ios_family %> -T dist-adhoc -R "<%= ios_adhoc_name %>" -P" <%= ios_adhoc_profile %>"  -O ~/Desktop ' 
+        command: 'ti build -p ios -F <%= ios_family %> -T dist-adhoc -R "<%= ios_adhoc_name %>" -P" <%= ios_adhoc_profile %>"  -O ~/Desktop '
       },
       appstore: {
-        command: 'ti build -p ios -F <%= ios_family %> -T dist-appstore -R "<%= ios_appstore_name %>" -P" <%= ios_apptore_profile %>"  -O ~/Desktop ' 
+        command: 'ti build -p ios -F <%= ios_family %> -T dist-appstore -R "<%= ios_appstore_name %>" -P" <%= ios_apptore_profile %>"  -O ~/Desktop '
       },
       playstore: {
-        command: 'ti build -T dist-playstore -O ~/Desktop -p android -K <%= android_keystore %> - P <%= android_keypass %>' 
+        command: 'ti build -T dist-playstore -O ~/Desktop -p android -K <%= android_keystore %> - P <%= android_keypass %>'
       }
     },
     watch: {
@@ -128,10 +131,10 @@ module.exports = function(grunt) {
         logConcurrentOutput: true,
       },
       run: {
-        tasks: ['tishadow:server','titanium:appify','tishadow:run', 'watch:views','watch:styles', 'watch:javascripts', /*'watch:assets',*/ ]
+        tasks: ['tishadow:server','shell:appify','tishadow:run', 'watch:views','watch:styles', 'watch:javascripts', /*'watch:assets',*/ ]
       },
       spec: {
-        tasks: ['tishadow:server','titanium:appify', 'tishadow:spec', 'watch:views','watch:styles', 'watch:javascripts', /*'watch:assets',*/ ]
+        tasks: ['tishadow:server','shell:appify', 'tishadow:spec', 'watch:views','watch:styles', 'watch:javascripts', /*'watch:assets',*/ ]
       }
     },
     copy: {
@@ -150,14 +153,6 @@ module.exports = function(grunt) {
         ]
       }
     },
-    titanium: {
-      appify: {
-        options:  {
-          command: 'build',
-          args: ti_args[grunt.option("p")||'default'].concat("--appify")
-        }
-      }
-    },
     clean: {
       project: {
         src: ['app/', 'Resources/', 'build/']
@@ -172,7 +167,7 @@ module.exports = function(grunt) {
   grunt.registerTask('test', ['tishadow:clear','build','concurrent:spec']);
 
   //titanium cli tasks
-  ['appstore','adhoc','playstore'].forEach(function(target) {
+  ['appify', 'appstore','adhoc','playstore'].forEach(function(target) {
     grunt.registerTask(target, ['build','shell:'+target]);
   });
 
@@ -184,7 +179,7 @@ module.exports = function(grunt) {
     if(grunt.option("p")) {
       ts_options.platform = grunt.option("p");
     }
-    var alloyCompileFile ; 
+    var alloyCompileFile ;
     var o = {};
     if (filepath.match(/.js/)) {
       var target = filepath.replace("src/", "app/");
@@ -221,6 +216,6 @@ module.exports = function(grunt) {
       o[target] = [filepath];
       alloyCompileFile = target;
       grunt.config.set(['copy','alloy','files'],o);
-    } 
+    }
   });
 };

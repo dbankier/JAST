@@ -20,7 +20,7 @@ function login() {
     Alloy.Globals.loading.hide();
     Alloy.Globals.alert.show({
       title: "Error",
-      message: "Could not Login" 
+      message: "Could not Login"
     });
   });
 }
