@@ -5,6 +5,7 @@
  */
 
 exports.cliVersion = '>=3.X';
+exports.version = '1.0.0';
 var SILENT = true;
 
 exports.init = function (logger, config, cli, appc) {
@@ -141,7 +142,7 @@ exports.init = function (logger, config, cli, appc) {
 
 				// execute alloy in os-specific manner
 				var child;
-				if (process.platform === 'win32' && paths.alloy.indexOf('.bin') !== -1) {
+				if (process.platform === 'win32' && paths.alloy === 'alloy.cmd') {
 					cmd.shift();
 					logger.info(__('Executing Alloy compile: %s',
 						['cmd','/s','/c'].concat(cmd).join(' ').cyan));
