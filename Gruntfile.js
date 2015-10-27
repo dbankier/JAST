@@ -1,6 +1,7 @@
 // titanium build targets,
 var ti_args= {
-  ios: ['-p','ios','-T', 'simulator', '--device-id','31361A2F-6B31-4B8F-A199-16EC1EEF4D2D'],
+  iphone: ['-p','ios','-T', 'simulator', '--device-id','31361A2F-6B31-4B8F-A199-16EC1EEF4D2D'],
+  ipad: ['-p','ios','-T', 'simulator', '--device-id','8A0883C7-A1E0-4957-82D9-DAF1D89B0FAD'],
   android: ['-p','android', '-T','device'],
   default: ['-p','ios']
 };
