@@ -1,7 +1,3 @@
-var $model = {};
-var nano = require("nano");
-nano.syntax(/\-\=(.+?)\=\-/gi);
-nano($,$model);
 $.index.open();
 
 function login() {
@@ -9,7 +5,7 @@ function login() {
   if (true) {
     Alloy.Globals.alert.show({
       title: "JAST",
-      message: JSON.stringify($model)
+      message: $.username.value
     });
     Alloy.Globals.loading.hide();
     return;

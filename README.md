@@ -14,7 +14,6 @@ JAST is a boilerplate with a  mash of tools for rapid Alloy development. Let's b
    for titanium development.
 
 And these libraries:
- * [nano](https://github.com/dbankier/nano) - for simple data-binding.
  * [XHR](https://github.com/raulriera/XHR) - a new XHR wrapper.
 
 And these widgets:
@@ -55,7 +54,6 @@ All code changes will be selectively precompiled and pushed (live-reload).
 ## Manual Install with Extras :+1:
 
 If you want to:
- * use the `{{ }}` syntax in nano.
  * use selective alloy compilation for super fast live reloads.
 
 You will need to install alloy from master and at least v.2.8.0 of tishadow - follow these steps.
