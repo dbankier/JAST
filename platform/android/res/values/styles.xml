@@ -1,13 +1,17 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">  
-  <style name="Theme.JAST" parent="Theme.AppCompat">
-    <item name="android:actionBarStyle">@style/Theme.JAST.ActionBar</item>
-    <!--  <item name="android:typeface">serif</item> -->
-  </style>         
-
-  <style name="Theme.JAST.ActionBar" parent="android:style/Widget.Holo.Light.ActionBar">
-    <item name="android:background">#277553</item>
-    <item name="android:backgroundStacked">#277553</item>
-    <item name="android:backgroundSplit">#277553</item>
-  </style>        
-
+  <style name="Theme.JAST" parent="@style/Theme.AppCompat.Light">
+      <item name="colorPrimary">@color/primary</item>
+      <item name="colorPrimaryDark">@color/primaryDark</item>      
+      <item name="colorAccent">@color/primaryDark</item>
+      <item name="colorControlHighlight">@color/colorHighlight</item>      
+      <item name="colorControlActivated">@color/colorActivated</item>      
+      <item name="android:navigationBarColor">@color/primaryDark</item>
+      <item name="android:statusBarColor">@color/primaryDark</item>
+      <item name="android:textColorPrimary">@color/textPrimary</item>
+    </style>
+    <color name="colorActivated">#caeeff</color>
+    <color name="primary">#C41230</color>
+    <color name="primaryDark">#9E0C24</color>
+    <color name="textPrimary">#000</color>
+    <color name="colorHighlight">#ffaaff</color>        
 </resources>
