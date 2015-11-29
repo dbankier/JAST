@@ -2,7 +2,7 @@
 var cacheManager = Titanium.App.Properties.getObject("cachedXHRDocuments", {});
 var appversion = Ti.App.version;
 
-XHR = function(){};
+var XHR = function(){};
 
 // Public functions
 // ================
@@ -84,7 +84,7 @@ XHR.prototype.get = function(url, onSuccess, onError, extraParams) {
     result.data = cache;
 
     onSuccess(result);
-  } 
+  }
 };
 
 // POST requests
@@ -274,7 +274,7 @@ XHR.prototype.clear = function(url) {
       var file = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory, hashedURL);
       // Delete the record and file
       delete cacheManager[hashedURL];
-      file.deleteFile();  
+      file.deleteFile();
 
       // Update the cache manager
       updateCacheManager();
@@ -299,7 +299,7 @@ XHR.prototype.clean = function() {
       var file = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory, key);
       // Delete the record and file
       delete cacheManager[key];
-      file.deleteFile();  
+      file.deleteFile();
 
       // Update the cache manager
       updateCacheManager();
@@ -313,7 +313,7 @@ XHR.prototype.clean = function() {
   }
 
   // Return the number of files deleted
-  return expiredDocuments;  
+  return expiredDocuments;
 };
 
 // Removes all documents from the manager and the file system
@@ -327,7 +327,7 @@ XHR.prototype.purge = function() {
     var file = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory, key);
     // Delete the record and file
     delete cacheManager[key];
-    file.deleteFile();  
+    file.deleteFile();
 
     // Update the cache manager
     updateCacheManager();
@@ -340,13 +340,13 @@ XHR.prototype.purge = function() {
   }
 
   // Return the number of files deleted
-  return purgedDocuments; 
+  return purgedDocuments;
 };
 
 // Private functions
 // =================
 
-readCache = function(url) {
+var readCache = function(url) {
   // Hash the URL
   var hashedURL = Titanium.Utils.md5HexDigest(url);
 
@@ -374,10 +374,10 @@ readCache = function(url) {
 
       // Delete the record and file
       delete cacheManager[hashedURL];
-      file.deleteFile();  
+      file.deleteFile();
 
       // Update the cache manager
-      updateCacheManager(); 
+      updateCacheManager();
     }
   } else {
     //Titanium.API.info("CACHE " + hashedURL + " NOT FOUND");
@@ -386,11 +386,11 @@ readCache = function(url) {
   return result;
 };
 
-updateCacheManager = function(){
+var updateCacheManager = function(){
   Titanium.App.Properties.setObject("cachedXHRDocuments", cacheManager);
 };
 
-writeCache = function(data, url, ttl) {
+var writeCache = function(data, url, ttl) {
 
   //Titanium.API.info("WRITING CACHE");
 
