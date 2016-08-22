@@ -22,7 +22,7 @@
     "grunt-notify": "^0.4.3",
     "grunt-official-tishadow": "^1.2.1",
     "grunt-shell": "^1.1.2",
-    "grunt-stss": "^0.4.2",
+    "grunt-stss": "^0.4.4",
     "matchdep": "^1.0.0"
   },
   "dependencies": {}
