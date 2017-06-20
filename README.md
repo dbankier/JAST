@@ -46,7 +46,7 @@ You can optionally modify `Project Specific Definitions` section.
  * `git clone https://github.com/dbankier/JAST.git`
  * `[sudo] npm install alloy tishadow`
  * `cd JAST && [sudo] npm install`
- * `grunt dev -p ios`
+ * `grunt dev --p=ios`
 
 **Note**: the `grunt dev` command will start the tishadow server and launch a tishadow appified version of your app.
 All code changes will be selectively precompiled and pushed (live-reload).
@@ -63,19 +63,19 @@ You will need to install alloy from master and at least v.2.8.0 of tishadow - fo
  * `[sudo] npm install -g tishadow`
  * `tishadow config --boost`
  * `cd JAST && [sudo] npm install`
- * `grunt dev -p ios`
+ * `grunt dev --p=ios`
 
 ## Use the [Yeoman](http://yeoman.io) generator: [generator-alloy](https://github.com/dbankier/generator-alloy)
 
 ** NEEDS UPDATING - OUTDATED**
-``` 
+```
  npm install -g yo generator-alloy
  mkdir /path/to/new/app && cd $_
- yo alloy 
+ yo alloy
 ```
 
 
-If you want to use 
+If you want to use
 
 # Structure
 
@@ -85,8 +85,8 @@ The **ENTIRE** `app` directory will be cleaned on `grunt clean`.
 # Commands
 
  * `grunt` - compiles the jade, stss and es6 files and copies all the assets from `src` to `app`
- * `grunt dev [-p <platform>]` - auto compile and pushes with TiShadow (`p` flag is optional)
- * `grunt test [-p <plaform>]` - run specs  (`p` flag is optional)
+ * `grunt dev [--p=<platform>]` - auto compile and pushes with TiShadow (`p` flag is optional)
+ * `grunt test [--p=<plaform>]` - run specs  (`p` flag is optional)
  * `grunt clean` - deletes all generated files
  * `grunt [iphone6|iphone7|ipad6|ipad7|appstore|adhoc|playstore]` - commands inspired by the work
     of @FokkeZB on [TiNy](https://github.com/FokkeZB/tn). Project specific settings are configured at
