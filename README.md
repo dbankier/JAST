@@ -46,7 +46,7 @@ You can optionally modify `Project Specific Definitions` section.
  * `git clone https://github.com/dbankier/JAST.git`
  * `[sudo] npm install alloy tishadow`
  * `cd JAST && [sudo] npm install`
- * `grunt dev --p=ios`
+ * `grunt dev --p=iphone`
 
 **Note**: the `grunt dev` command will start the tishadow server and launch a tishadow appified version of your app.
 All code changes will be selectively precompiled and pushed (live-reload).
@@ -63,7 +63,7 @@ You will need to install alloy from master and at least v.2.8.0 of tishadow - fo
  * `[sudo] npm install -g tishadow`
  * `tishadow config --boost`
  * `cd JAST && [sudo] npm install`
- * `grunt dev --p=ios`
+ * `grunt dev --p=iphone`
 
 ## Use the [Yeoman](http://yeoman.io) generator: [generator-alloy](https://github.com/dbankier/generator-alloy)
 
