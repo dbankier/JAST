@@ -124,7 +124,7 @@ module.exports = function(grunt) {
         tasks: ['babel']
       },
       assets: {
-        files: ['src/**', '!src/**/*.jade', '!src/**/*.stss', '!src/**/*.js'],
+        files: ['src/**/*.xml', 'src/**/*.tss', 'src/assets/**'],
         tasks: ['copy:alloy']
       }
     },
@@ -133,10 +133,10 @@ module.exports = function(grunt) {
         logConcurrentOutput: true,
       },
       run: {
-        tasks: ['tishadow:server','shell:appify','tishadow:run', 'watch:views','watch:styles', 'watch:javascripts', /*'watch:assets',*/ ]
+        tasks: ['tishadow:server','shell:appify','tishadow:run', 'watch:views','watch:styles', 'watch:javascripts','watch:assets' ]
       },
       spec: {
-        tasks: ['tishadow:server','shell:appify', 'tishadow:spec', 'watch:views','watch:styles', 'watch:javascripts', /*'watch:assets',*/ ]
+        tasks: ['tishadow:server','shell:appify', 'tishadow:spec', 'watch:views','watch:styles', 'watch:javascripts', 'watch:assets' ]
       }
     },
     copy: {
