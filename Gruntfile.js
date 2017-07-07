@@ -101,7 +101,7 @@ module.exports = function(grunt) {
         command: 'ti build -p ios -F <%= ios_family %> -T dist-adhoc -R "<%= ios_adhoc_name %>" -P "<%= ios_adhoc_profile %>"  -O ~/Desktop '
       },
       appstore: {
-        command: 'ti build -p ios -F <%= ios_family %> -T dist-appstore -R "<%= ios_appstore_name %>" -P "<%= ios_appstore_name %>"  -O ~/Desktop '
+        command: 'ti build -p ios -F <%= ios_family %> -T dist-appstore -R "<%= ios_appstore_name %>" -P "<%= ios_appstore_profile %>"  -O ~/Desktop '
       },
       playstore: {
         command: 'ti build -T dist-playstore -O ~/Desktop -p android -K <%= android_keystore %> - P <%= android_keypass %>'
@@ -124,7 +124,7 @@ module.exports = function(grunt) {
         tasks: ['babel']
       },
       assets: {
-        files: ['src/**', '!src/**/*.jade', '!src/**/*.stss', '!src/**/*.js'],
+        files: ['src/**/*.!(jade|stss|js)'],
         tasks: ['copy:alloy']
       }
     },
@@ -133,10 +133,10 @@ module.exports = function(grunt) {
         logConcurrentOutput: true,
       },
       run: {
-        tasks: ['tishadow:server','shell:appify','tishadow:run', 'watch:views','watch:styles', 'watch:javascripts', /*'watch:assets',*/ ]
+        tasks: ['tishadow:server','shell:appify','tishadow:run', 'watch:views','watch:styles', 'watch:javascripts','watch:assets' ]
       },
       spec: {
-        tasks: ['tishadow:server','shell:appify', 'tishadow:spec', 'watch:views','watch:styles', 'watch:javascripts', /*'watch:assets',*/ ]
+        tasks: ['tishadow:server','shell:appify', 'tishadow:spec', 'watch:views','watch:styles', 'watch:javascripts', 'watch:assets' ]
       }
     },
     copy: {
