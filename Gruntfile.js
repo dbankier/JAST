@@ -124,7 +124,7 @@ module.exports = function(grunt) {
         tasks: ['babel']
       },
       assets: {
-        files: ['src/**/*.xml', 'src/**/*.tss', 'src/assets/**'],
+        files: ['src/**/*.!(jade|stss|js)'],
         tasks: ['copy:alloy']
       }
     },
