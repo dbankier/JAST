@@ -101,7 +101,7 @@ module.exports = function(grunt) {
         command: 'ti build -p ios -F <%= ios_family %> -T dist-adhoc -R "<%= ios_adhoc_name %>" -P "<%= ios_adhoc_profile %>"  -O ~/Desktop '
       },
       appstore: {
-        command: 'ti build -p ios -F <%= ios_family %> -T dist-appstore -R "<%= ios_appstore_name %>" -P "<%= ios_appstore_name %>"  -O ~/Desktop '
+        command: 'ti build -p ios -F <%= ios_family %> -T dist-appstore -R "<%= ios_appstore_name %>" -P "<%= ios_appstore_profile %>"  -O ~/Desktop '
       },
       playstore: {
         command: 'ti build -T dist-playstore -O ~/Desktop -p android -K <%= android_keystore %> - P <%= android_keypass %>'
@@ -124,7 +124,7 @@ module.exports = function(grunt) {
         tasks: ['babel']
       },
       assets: {
-        files: ['src/**', '!src/**/*.jade', '!src/**/*.stss', '!src/**/*.js'],
+        files: ['src/**/*.!(jade|stss|js)'],
         tasks: ['copy:alloy']
       }
     },
@@ -133,10 +133,10 @@ module.exports = function(grunt) {
         logConcurrentOutput: true,
       },
       run: {
-        tasks: ['tishadow:server','shell:appify','tishadow:run', 'watch:views','watch:styles', 'watch:javascripts', /*'watch:assets',*/ ]
+        tasks: ['tishadow:server','shell:appify','tishadow:run', 'watch:views','watch:styles', 'watch:javascripts','watch:assets' ]
       },
       spec: {
-        tasks: ['tishadow:server','shell:appify', 'tishadow:spec', 'watch:views','watch:styles', 'watch:javascripts', /*'watch:assets',*/ ]
+        tasks: ['tishadow:server','shell:appify', 'tishadow:spec', 'watch:views','watch:styles', 'watch:javascripts', 'watch:assets' ]
       }
     },
     copy: {
@@ -149,7 +149,8 @@ module.exports = function(grunt) {
           src: [
             '**',
             '!**/*.jade',
-            '!**/*.stss'
+            '!**/*.stss',
+            '!**/*.js'
           ]
         }
         ]
@@ -174,50 +175,69 @@ module.exports = function(grunt) {
   });
 
   //only modify changed file
-  grunt.event.on('watch', function(action, filepath) {
-    var ts_options =  {
-      update : true,
+  var changedFiles = Object.create(null);
+  var onChange = grunt.util._.debounce(function() {
+    var o = {
+      'babel': [],
+      'jade': [],
+      'stss': [],
+      'stssall': false,
+      'copy': []
     };
-    if(grunt.option("p")) {
-      ts_options.platform = ti_args[grunt.option("p")][1];
-    }
-    var alloyCompileFile ;
-    var o = {};
-    if (filepath.match(/.js/)) {
-      var target = filepath.replace("src/", "app/");
-      o[target] = [filepath];
-      grunt.config.set(['babel', 'dist', 'files'],o);
-      if (!filepath.match(/alloy\.js$/)) {
-        alloyCompileFile = target;
-      }
-    } else if (filepath.match(/.jade$/) && filepath.indexOf("includes") === -1) {
-      var target  = filepath.replace(".jade",".xml").replace("src/","app/");
-      o[target] = [filepath];
-      grunt.config.set(['jade', 'compile', 'files'],o);
-      alloyCompileFile = target;
-    } else if (filepath.match(/.stss$/) && filepath.indexOf("includes") === -1){
-      if (filepath.match(/\/_.*?\.stss/)) { // if it is partial then recompile all stss
-        grunt.log.write("Partial modified, rewriting all styles");
-        grunt.config.set(['stss', 'compile', 'files'],[{
-          expand: true,
-          src: ['**/*.stss','!**/_*.stss'],
-          dest: 'app',
-          cwd: 'src',
-          ext: '.tss'
-        }]);
-      } else {
-        var target = filepath.replace(".stss",".tss").replace("src/","app/");
-        o[target] = [filepath];
-        if (!filepath.match(/app\.stss$/)) {
-          alloyCompileFile = target;
+
+    Object.keys(changedFiles).forEach(function(filepath) {
+      if (filepath.match(/.js/)) {
+        var target = filepath.replace("src/", "app/");
+        o.babel.push({ src: filepath, dest: target });
+      } else if (filepath.match(/.jade$/) && filepath.indexOf("includes") === -1) {
+        var target  = filepath.replace(".jade",".xml").replace("src/","app/");
+        // o.jade[target] = [filepath];
+        o.jade.push({ src: filepath, dest: target });
+      } else if (filepath.match(/.stss$/) && filepath.indexOf("includes") === -1){
+        if (filepath.match(/\/_.*?\.stss/)) { // if it is partial then recompile all stss
+          o.stssall = true;
+          o.stss = [];
+        } else if (!o.stssall) {
+          var target = filepath.replace(".stss",".tss").replace("src/","app/");
+          o.stss.push({ src: filepath, dest: target });
         }
-        grunt.config.set(['stss', 'compile', 'files'],o);
+      } else if (filepath.match(/^src/)){
+        var target = filepath.replace("src/", "app/");
+        o.copy.push({ src: filepath, dest: target });
       }
-    } else if (filepath.match(/^src/)){
-      var target = filepath.replace("src/", "app/");
-      o[target] = [filepath];
-      alloyCompileFile = target;
-      grunt.config.set(['copy','alloy','files'],o);
+    });
+
+    // babel
+    if (o.babel.length) {
+      grunt.config.set(['babel', 'dist', 'files'], o.babel);
     }
+    // jade
+    if (o.jade.length) {
+      grunt.config.set(['jade', 'compile', 'files'], o.jade);
+    }
+    // stss
+    if (o.stssall) {
+      grunt.log.write("Partial modified, rewriting all styles");
+      grunt.config.set(['stss', 'compile', 'files'],[{
+        expand: true,
+        src: ['**/*.stss','!**/_*.stss'],
+        dest: 'app',
+        cwd: 'src',
+        ext: '.tss'
+      }]);
+    } else if (o.stss.length) {
+      grunt.config.set(['stss', 'compile', 'files'], o.stss);
+    }
+    // copy
+    if (o.copy.length) {
+      grunt.config.set(['copy','alloy','files'], o.copy);
+    }
+
+    // done
+    changedFiles = Object.create(null);
+  }, 200);
+  grunt.event.on('watch', function(action, filepath) {
+    changedFiles[filepath] = action;
+    onChange();
   });
 };
