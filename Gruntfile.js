@@ -104,7 +104,7 @@ module.exports = function(grunt) {
         command: 'ti build -p ios -F <%= ios_family %> -T dist-appstore -R "<%= ios_appstore_name %>" -P "<%= ios_appstore_profile %>"  -O ~/Desktop '
       },
       playstore: {
-        command: 'ti build -T dist-playstore -O ~/Desktop -p android -K <%= android_keystore %> - P <%= android_keypass %>'
+        command: 'ti build -T dist-playstore -O ~/Desktop -p android -K <%= android_keystore %> -P <%= android_keypass %>'
       }
     },
     watch: {
